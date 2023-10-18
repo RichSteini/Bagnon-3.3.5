@@ -30,11 +30,7 @@ function ItemSlotInfo:IsLocked(player, bag, slot)
 	if self:IsCached(player, bag, slot) then
 		return false
 	end
-
-	local texture, count, locked, quality, readable, lootable, link = GetContainerItemInfo(bag, slot)
-	link = GetContainerItemLink(bag, slot)
-	--return (select(3, GetContainerItemInfo(bag, slot)))
-	return locked, quality, readable, lootable, link
+	return (select(3, GetContainerItemInfo(bag, slot)))
 end
 
 function ItemSlotInfo:IsCached(player, bag, slot)

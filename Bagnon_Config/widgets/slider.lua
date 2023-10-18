@@ -17,7 +17,7 @@ function OptionsSlider:New(name, parent, low, high, step)
 	f:EnableMouseWheel(true)
 
 	_G[f:GetName() .. 'Text']:SetText(name)
-	_G[f:GetName() .. 'Text']:SetFontObject('GameFontNormal')
+	_G[f:GetName() .. 'Text']:SetFontObject('GameFontNormalLeft')
 	_G[f:GetName() .. 'Text']:ClearAllPoints()
 	_G[f:GetName() .. 'Text']:SetPoint('BOTTOMLEFT', f, 'TOPLEFT')
 --	_G[f:GetName() .. 'Text']:SetJustifyH('LEFT')

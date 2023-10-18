@@ -559,7 +559,7 @@ end
 
 --returns true if the item is a quest item or not
 --in 3.3, includes a second return to determine if the item is a quest starter for a quest the player lacks
-local QUEST_ITEM_SEARCH = string.format('t:%s|%s', select(11, GetAuctionItemClasses()), 'quest')
+local QUEST_ITEM_SEARCH = string.format('t:%s|%s', select(12, GetAuctionItemClasses()), 'quest')
 
 if hasBlizzQuestHighlight() then
 	function ItemSlot:IsQuestItem()

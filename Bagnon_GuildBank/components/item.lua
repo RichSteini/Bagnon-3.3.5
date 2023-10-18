@@ -426,7 +426,7 @@ function ItemSlot:GetHighlightAlpha()
 	return Bagnon.Settings:GetHighlightOpacity()
 end
 
-local QUEST_ITEM_SEARCH = string.format('t:%s|%s', select(11, GetAuctionItemClasses()), 'quest')
+local QUEST_ITEM_SEARCH = string.format('t:%s|%s', select(12, GetAuctionItemClasses()), 'quest')
 function ItemSlot:IsQuestItem()
 	local itemLink = self:GetItem()
 	if not itemLink then

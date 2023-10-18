@@ -1,4 +1,4 @@
-## Interface: 20400
+## Interface: 30300
 ## Title: Bagnon Forever
 ## Notes: Stores inventory information about your characters
 ## Notes-zhTW: 儲存角色背包和銀行的物品資訊

@@ -55,7 +55,7 @@ end
 
 function BrokerDisplay:AddText()
 	local text = self:CreateFontString()
-	text:SetFontObject('GameFontNormal')
+	text:SetFontObject('GameFontNormalRight')
 	text:SetJustifyH('LEFT')
 
 	return text
@@ -69,7 +69,7 @@ end
 function BrokerDisplay:CreateLeftButton()
 	local b = CreateFrame('Button', nil, self)
 
-	b:SetTextFontObject('GameFontNormal')
+	b:SetNormalFontObject('GameFontNormal')
 	b:SetHighlightFontObject('GameFontHighlight')
 	b:SetText('<')
 	b:SetWidth(b:GetTextWidth() + 4)
@@ -85,7 +85,7 @@ function BrokerDisplay:CreateRightButton()
 	b:SetWidth(ICON_SIZE)
 	b:SetHeight(ICON_SIZE)
 
-	b:SetTextFontObject('GameFontNormal')
+	b:SetNormalFontObject('GameFontNormal')
 	b:SetHighlightFontObject('GameFontHighlight')
 	b:SetText('>')
 	b:SetWidth(b:GetTextWidth() + 2)

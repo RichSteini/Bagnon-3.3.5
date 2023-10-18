@@ -1,4 +1,4 @@
-## Interface: 20400
+## Interface: 30300
 ## Title: Bagnon
 ## Author: Tuller
 ## Notes: Single window displays for your inventory, bank, and keys

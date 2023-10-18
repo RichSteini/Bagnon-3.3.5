@@ -209,15 +209,11 @@ function Bagnon:HookBagClickEvents()
 	local oOpenAllBags = OpenAllBags
 	OpenAllBags = function(force)
 		local opened = false
-		-- force does not exist?
-		--[[
 		if force then
 			opened = self:FrameControlsBag('inventory', BACKPACK_CONTAINER) and self:ShowFrame('inventory')
 		else
 			opened = self:FrameControlsBag('inventory', BACKPACK_CONTAINER) and self:ToggleFrame('inventory')
 		end
-		]]
-		opened = self:FrameControlsBag('inventory', BACKPACK_CONTAINER) and self:ShowFrame('inventory')
 
 		if not opened then
 			oOpenAllBags(force)
@@ -405,7 +401,7 @@ end
 
 function Bagnon:ShowOptions()
 	if LoadAddOn('Bagnon_Config') then
-		InterfaceOptionsFrame_OpenToFrame(self.GeneralOptions)
+		InterfaceOptionsFrame_OpenToCategory(self.GeneralOptions)
 		return true
 	end
 	return false

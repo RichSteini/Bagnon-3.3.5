@@ -26,7 +26,7 @@ end
 
 function FrameOptions:ShowFrame(frameID)
 	self:SetFrameID(frameID)
-	InterfaceOptionsFrame_OpenToFrame(self)
+	InterfaceOptionsFrame_OpenToCategory(self)
 end
 
 
@@ -278,12 +278,12 @@ function FrameOptions:CreateFrameSelector()
 	dropdown.titleText:Hide()
 
 	dropdown.Initialize = function(self)
-		dropdown:AddItem(L.Inventory, 'inventory')
-		dropdown:AddItem(L.Bank, 'bank')
-		dropdown:AddItem(L.KeyRing, 'keys')
+	self:AddItem(L.Inventory, 'inventory')
+	self:AddItem(L.Bank, 'bank')
+	self:AddItem(L.KeyRing, 'keys')
 		
 		if IsAddOnLoaded('Bagnon_GuildBank') then
-			dropdown:AddItem(L.GuildBank, 'guildbank')
+			self:AddItem(L.GuildBank, 'guildbank')
 		end
 	end
 

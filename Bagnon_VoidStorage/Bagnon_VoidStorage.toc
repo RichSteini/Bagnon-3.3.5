@@ -1,4 +1,4 @@
-## Interface: 20400
+## Interface: 30300
 ## Title: Bagnon Void Storage
 ## Author: Jaliborc (João Cardoso)
 ## Notes: Single window display for your void storage

@@ -23,7 +23,7 @@ end
 --[[ Frame Evnets ]]--
 
 function OptionsDropdown:OnShow()
-	UIDropDownMenu_SetWidth(self.width, self)
+	UIDropDownMenu_SetWidth(self, self.width)
 	UIDropDownMenu_Initialize(self, self.Initialize)
 	UIDropDownMenu_SetSelectedValue(self, self:GetSavedValue())
 end
@@ -46,9 +46,9 @@ end
 
 --[[ Item Adding ]]--
 
-local function item_OnClick(self)
-	self:SetSavedValue(this.value)
-	UIDropDownMenu_SetSelectedValue(self, this.value)		
+local function item_OnClick(self, dropdown)
+	dropdown:SetSavedValue(self.value)
+	UIDropDownMenu_SetSelectedValue(dropdown, self.value)		
 end
 
 function OptionsDropdown:AddItem(name, value)

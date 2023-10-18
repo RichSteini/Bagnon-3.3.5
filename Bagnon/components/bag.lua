@@ -390,7 +390,7 @@ function Bag:PurchaseSlot()
 			end,
 
 			OnShow = function(self)
-				MoneyFrame_Update(this:GetName() .. 'MoneyFrame', GetBankSlotCost(GetNumBankSlots()))
+				MoneyFrame_Update(self:GetName() .. 'MoneyFrame', GetBankSlotCost(GetNumBankSlots()))
 			end,
 
 			hasMoneyFrame = 1,
