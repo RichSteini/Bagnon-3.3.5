@@ -217,6 +217,12 @@ function Sort:FitsIn(id, family)
 end
 
 function Sort.Rule(a, b)
+  if a.id == 6948 then
+    if b.id ~= 6948 then return true end
+  elseif b.id == 6948 then
+    return false
+  end
+
   for _,prop in pairs(Sort.Proprieties) do
     if a[prop] ~= b[prop] then
       return a[prop] > b[prop]
