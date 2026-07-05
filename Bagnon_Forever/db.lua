@@ -36,6 +36,10 @@ local function ToBagIndex(bag)
 	return (tonumber(bag) and bag*100) or bag
 end
 
+local function HasKeyRing()
+	return KEYRING_CONTAINER and GetKeyRingSize
+end
+
 --returns the full item link only for items that have enchants/suffixes, otherwise returns the item's ID
 local function ToShortLink(link)
 	if link then
@@ -48,7 +52,7 @@ local function ToShortLink(link)
 end
 
 local function GetBagSize(bag)
-	if bag == KEYRING_CONTAINER then
+	if HasKeyRing() and bag == KEYRING_CONTAINER then
 		return GetKeyRingSize()
 	end
 	if bag == 'e' then
@@ -120,7 +124,9 @@ end
 function BagnonDB:PLAYER_LOGIN()
 	self:SaveMoney()
 	self:UpdateBag(BACKPACK_CONTAINER)
-	self:UpdateBag(KEYRING_CONTAINER)
+	if HasKeyRing() then
+		self:UpdateBag(KEYRING_CONTAINER)
+	end
 	self:SaveEquipment()
 	self:SaveNumBankSlots()
 
@@ -138,7 +144,7 @@ function BagnonDB:PLAYER_MONEY()
 end
 
 function BagnonDB:BAG_UPDATE(event, bag)
-	if not(bag == BANK_CONTAINER or bag > NUM_BAG_SLOTS) or self.atBank then
+	if self.atBank or (bag >= BACKPACK_CONTAINER and bag <= NUM_BAG_SLOTS) or (HasKeyRing() and bag == KEYRING_CONTAINER) then
 		self:OnBagUpdate(bag)
 	end
 end
