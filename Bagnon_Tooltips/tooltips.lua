@@ -8,6 +8,13 @@ local itemInfo = {}
 local SILVER = '|cffc7c7cf%s|r'
 local TEAL = '|cff00ff9a%s|r'
 
+local function GetKeyRingItemCount(link, player)
+	if KEYRING_CONTAINER and GetKeyRingSize then
+		return BagnonDB:GetItemCount(link, KEYRING_CONTAINER, player)
+	end
+	return 0
+end
+
 local function CountsToInfoString(invCount, bankCount, equipCount)
 	local info
 	local total = invCount + bankCount + equipCount
@@ -48,7 +55,7 @@ do
 	for player in BagnonDB:GetPlayers() do
 		if player ~= currentPlayer then
 			itemInfo[player] = setmetatable({}, {__index = function(self, link)
-				local invCount = BagnonDB:GetItemCount(link, KEYRING_CONTAINER, player)
+				local invCount = GetKeyRingItemCount(link, player)
 				for bag = 0, NUM_BAG_SLOTS do
 					invCount = invCount + BagnonDB:GetItemCount(link, bag, player)
 				end
@@ -71,7 +78,7 @@ local function AddOwners(frame, link)
 	for player in BagnonDB:GetPlayers() do
 		local infoString
 		if player == currentPlayer then
-			local invCount = BagnonDB:GetItemCount(link, KEYRING_CONTAINER, player)
+			local invCount = GetKeyRingItemCount(link, player)
 			for bag = 0, NUM_BAG_SLOTS do
 				invCount = invCount + BagnonDB:GetItemCount(link, bag, player)
 			end
