@@ -11,6 +11,25 @@ Bagnon.GuildTab = GuildTab
 local SIZE = 32
 local NORMAL_TEXTURE_SIZE = 64 * (SIZE/36)
 
+--the purchase dialog normally lives in Blizzard's guild bank UI, which Bagnon replaces
+if not StaticPopupDialogs['CONFIRM_BUY_GUILDBANK_TAB'] then
+	StaticPopupDialogs['CONFIRM_BUY_GUILDBANK_TAB'] = {
+		text = CONFIRM_BUY_GUILDBANK_TAB,
+		button1 = YES,
+		button2 = NO,
+		OnAccept = function(self)
+			BuyGuildBankTab()
+		end,
+		OnShow = function(self)
+			MoneyFrame_Update(self.moneyFrame, GetGuildBankTabCost())
+		end,
+		hasMoneyFrame = 1,
+		timeout = 0,
+		hideOnEscape = 1,
+		whileDead = 1,
+	}
+end
+
 
 --[[ Constructor ]]--
 
@@ -129,6 +148,12 @@ function GuildTab:OnHide()
 end
 
 function GuildTab:OnClick()
+	if self:CanPurchase() then
+		self:UpdateChecked()
+		StaticPopup_Show('CONFIRM_BUY_GUILDBANK_TAB')
+		return
+	end
+
 	SetCurrentGuildBankTab(self:GetID())
 	QueryGuildBankTab(self:GetID())
 	self:SendMessage('GUILD_BANK_TAB_CHANGE', self:GetID())
@@ -215,13 +240,25 @@ function GuildTab:IsCurrentTab()
 	return self:GetID() == GetCurrentGuildBankTab()
 end
 
+--only the next tab in line can be bought, and only by the guild master
+function GuildTab:CanPurchase()
+	return IsGuildLeader() and self:GetID() == GetNumGuildBankTabs() + 1
+end
+
 
 --[[ Tooltip Methods ]]--
 
 function GuildTab:UpdateTooltip()
 	local name, icon, isViewable, canDeposit, numWithdrawals, remainingWithdrawals = GetGuildBankTabInfo(self:GetID())
 
-	if name then
+	if self:CanPurchase() then
+		GameTooltip:SetText('Purchase guild bank tab', 1, 1, 1)
+		local cost = GetGuildBankTabCost()
+		if cost then
+			SetTooltipMoney(GameTooltip, cost)
+		end
+		GameTooltip:AddLine('Click to purchase this tab.')
+	elseif name then
 		GameTooltip:SetText(name)
 
 		local access
